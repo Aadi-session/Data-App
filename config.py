@@ -1,9 +1,19 @@
 import os
+import streamlit as st
 from dotenv import load_dotenv
 
 load_dotenv()
 
-OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY", "")
+
+def _get_secret(key: str) -> str:
+    """Try st.secrets first (Streamlit Cloud), then env var (local .env)."""
+    try:
+        return st.secrets[key]
+    except (KeyError, FileNotFoundError):
+        return os.environ.get(key, "")
+
+
+OPENAI_API_KEY = _get_secret("OPENAI_API_KEY")
 OPENAI_MODEL = "gpt-4o"
 MAX_TOKENS = 6000
 TEMPERATURE = 0.7

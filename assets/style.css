@@ -1,0 +1,397 @@
+/* ==========================================================================
+   TMDC Brand Theme — The Modern Data Company
+   PRIMARY PALETTE
+     Primary Teal  #54DED1      Ember       #FF5537
+     Dark Teal     #009293      Iron        #35505B
+     Dusky Ember   #733635      Midnight    #202F36
+   NEUTRALS
+     Slate         #242422      Sandpaper   #D6CDC6
+     Cream         #EDE9E5      Background  #E0DBD6
+   TEXT
+     Heading       #242321      Body        #242321
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap');
+
+/* --- Global font (set on body, inherits naturally, does NOT break icons) --- */
+body {
+    font-family: "PP Neue Montreal", "Inter", "DM Sans", -apple-system, BlinkMacSystemFont, sans-serif !important;
+}
+
+/* ==========================================================================
+   SIDEBAR  (Midnight background, light text)
+   ========================================================================== */
+[data-testid="stSidebar"] {
+    background: #202F36 !important;
+}
+[data-testid="stSidebar"] > div {
+    background: #202F36 !important;
+}
+
+/* Sidebar text — target text elements only, NOT icons */
+[data-testid="stSidebar"] h1,
+[data-testid="stSidebar"] h2,
+[data-testid="stSidebar"] h3,
+[data-testid="stSidebar"] p,
+[data-testid="stSidebar"] label,
+[data-testid="stSidebar"] li {
+    color: #29221a !important;
+}
+
+/* Section labels (SAMPLE PRDS, QUICK-START TEMPLATES) */
+[data-testid="stSidebar"] [data-testid="stMarkdownContainer"] strong {
+    color: #54DED1 !important;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+/* Captions */
+[data-testid="stSidebar"] [data-testid="stCaptionContainer"] p {
+    color: #8ca8b4 !important;
+}
+
+/* Sidebar dividers */
+[data-testid="stSidebar"] hr {
+    border-color: rgba(84, 222, 209, 0.15) !important;
+}
+
+/* Sidebar buttons — visible text on dark background */
+[data-testid="stSidebar"] .stButton > button {
+    background: rgba(84, 222, 209, 0.1) !important;
+    border: 1px solid rgba(84, 222, 209, 0.3) !important;
+    color: #EDE9E5 !important;
+    font-weight: 500;
+    font-size: 0.85rem;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+[data-testid="stSidebar"] .stButton > button:hover {
+    background: rgba(84, 222, 209, 0.22) !important;
+    border-color: #54DED1 !important;
+    color: #54DED1 !important;
+}
+[data-testid="stSidebar"] .stButton > button:active,
+[data-testid="stSidebar"] .stButton > button:focus {
+    color: #54DED1 !important;
+}
+
+/* Sidebar button text — make sure inner spans get the right color */
+[data-testid="stSidebar"] .stButton > button p,
+[data-testid="stSidebar"] .stButton > button span {
+    color: inherit !important;
+}
+
+/* Sidebar inputs */
+[data-testid="stSidebar"] input[type="text"],
+[data-testid="stSidebar"] textarea {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid rgba(84, 222, 209, 0.25) !important;
+    color: #EDE9E5 !important;
+    border-radius: 8px;
+}
+
+/* ==========================================================================
+   MATERIAL ICONS — never override their font-family
+   The sidebar collapse/expand arrows use Material Symbols Rounded.
+   ========================================================================== */
+span[data-testid="stIconMaterial"],
+[data-testid="stSidebarCollapseButton"] span,
+[data-testid="collapsedControl"] span,
+button[kind="headerNoPadding"] span {
+    font-family: "Material Symbols Rounded" !important;
+    color: #54DED1 !important;
+}
+
+/* ==========================================================================
+   MAIN CONTENT — HEADINGS
+   ========================================================================== */
+[data-testid="stAppViewContainer"] h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: #242321 !important;
+}
+[data-testid="stAppViewContainer"] h2 {
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: #242321 !important;
+    margin-top: 1.5rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 2px solid #54DED1;
+}
+[data-testid="stAppViewContainer"] h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #35505B !important;
+}
+
+/* Captions in main area */
+[data-testid="stAppViewContainer"] [data-testid="stCaptionContainer"] p {
+    color: #35505B !important;
+    font-size: 0.85rem;
+}
+
+/* ==========================================================================
+   FORM ELEMENTS (main area) — white background, dark text
+   ========================================================================== */
+[data-testid="stAppViewContainer"] input[type="text"],
+[data-testid="stAppViewContainer"] textarea {
+    background-color: #ffffff !important;
+    color: #242321 !important;
+    border: 1px solid #D6CDC6 !important;
+    border-radius: 8px !important;
+}
+[data-testid="stAppViewContainer"] input[type="text"]:focus,
+[data-testid="stAppViewContainer"] textarea:focus {
+    border-color: #54DED1 !important;
+    box-shadow: 0 0 0 1px rgba(84, 222, 209, 0.35) !important;
+}
+[data-testid="stAppViewContainer"] input::placeholder,
+[data-testid="stAppViewContainer"] textarea::placeholder {
+    color: #9a938c !important;
+}
+
+/* Labels */
+[data-testid="stAppViewContainer"] label {
+    color: #242321 !important;
+}
+
+/* Selectbox / Multiselect — white bg, dark text */
+[data-testid="stAppViewContainer"] [data-baseweb="select"] > div {
+    background-color: #ffffff !important;
+    border-color: #D6CDC6 !important;
+    border-radius: 8px !important;
+}
+[data-testid="stAppViewContainer"] [data-baseweb="select"] > div:focus-within {
+    border-color: #54DED1 !important;
+    box-shadow: 0 0 0 1px rgba(84, 222, 209, 0.35) !important;
+}
+[data-testid="stAppViewContainer"] [data-baseweb="select"] span {
+    color: #242321 !important;
+}
+[data-testid="stAppViewContainer"] [data-baseweb="select"] [data-baseweb="tag"] {
+    background-color: rgba(84, 222, 209, 0.15) !important;
+    border-radius: 6px !important;
+}
+[data-testid="stAppViewContainer"] [data-baseweb="select"] [data-baseweb="tag"] span {
+    color: #242321 !important;
+}
+
+/* Dropdown menu */
+[data-baseweb="popover"] {
+    background-color: #ffffff !important;
+}
+[data-baseweb="popover"] li {
+    color: #242321 !important;
+    background-color: #ffffff !important;
+}
+[data-baseweb="popover"] li:hover {
+    background-color: rgba(84, 222, 209, 0.1) !important;
+}
+[data-baseweb="popover"] li[aria-selected="true"] {
+    background-color: rgba(84, 222, 209, 0.18) !important;
+}
+
+/* ==========================================================================
+   BUTTONS (main area)
+   ========================================================================== */
+
+/* Primary — Dark Teal */
+[data-testid="stAppViewContainer"] .stButton > button[kind="primary"] {
+    background-color: #009293 !important;
+    border: none !important;
+    color: #ffffff !important;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+[data-testid="stAppViewContainer"] .stButton > button[kind="primary"]:hover {
+    background-color: #007a7b !important;
+    box-shadow: 0 2px 8px rgba(0, 146, 147, 0.35);
+}
+
+/* Secondary — white bg, iron text */
+[data-testid="stAppViewContainer"] .stButton > button:not([kind="primary"]) {
+    border-radius: 8px;
+    border: 1px solid #D6CDC6 !important;
+    background-color: #ffffff !important;
+    color: #35505B !important;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+[data-testid="stAppViewContainer"] .stButton > button:not([kind="primary"]):hover {
+    border-color: #009293 !important;
+    color: #009293 !important;
+    background: rgba(0, 146, 147, 0.04) !important;
+}
+
+/* Download */
+.stDownloadButton > button {
+    border-radius: 8px !important;
+    border: 1px solid #009293 !important;
+    color: #35505B !important;
+    background: #ffffff !important;
+    font-weight: 500;
+}
+.stDownloadButton > button:hover {
+    background: rgba(0, 146, 147, 0.06) !important;
+}
+
+/* Button row sizing */
+[data-testid="stHorizontalBlock"] .stDownloadButton > button,
+[data-testid="stHorizontalBlock"] .stButton > button {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.75rem;
+}
+
+/* ==========================================================================
+   TAG PILLS (custom inline)
+   ========================================================================== */
+.tag-pill {
+    display: inline-block;
+    background: rgba(84, 222, 209, 0.15);
+    color: #35505B;
+    padding: 4px 12px;
+    border-radius: 16px;
+    margin: 2px 4px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+/* ==========================================================================
+   TABLES (markdown preview)
+   ========================================================================== */
+[data-testid="stMarkdownContainer"] table {
+    font-size: 0.9rem;
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0.75rem 0;
+}
+[data-testid="stMarkdownContainer"] th,
+[data-testid="stMarkdownContainer"] td {
+    border: 1px solid #D6CDC6;
+    padding: 8px 12px;
+    text-align: left;
+    color: #242321;
+}
+[data-testid="stMarkdownContainer"] th {
+    background: #202F36;
+    font-weight: 600;
+    color: #EDE9E5;
+}
+[data-testid="stMarkdownContainer"] tr:nth-child(even) {
+    background: #E0DBD6;
+}
+[data-testid="stMarkdownContainer"] tr:nth-child(odd) {
+    background: #ffffff;
+}
+
+/* ==========================================================================
+   DIVIDER
+   ========================================================================== */
+hr {
+    border: none;
+    border-top: 1px solid #D6CDC6;
+    margin: 1.5rem 0;
+}
+
+/* ==========================================================================
+   TOAST
+   ========================================================================== */
+[data-testid="stToast"] {
+    background: #e5faf8;
+    color: #1a4a44;
+    border-left: 4px solid #009293;
+}
+
+/* ==========================================================================
+   SAMPLE PRD BANNER
+   ========================================================================== */
+.sample-prd-banner {
+    background: linear-gradient(135deg, #202F36 0%, #35505B 100%);
+    padding: 1.5rem 2rem;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+}
+.sample-prd-banner h3 {
+    color: #54DED1 !important;
+    margin: 0 0 0.5rem 0;
+    border-bottom: none !important;
+    padding-bottom: 0 !important;
+}
+.sample-prd-banner p {
+    color: #D6CDC6 !important;
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+/* ==========================================================================
+   LOGO
+   ========================================================================== */
+.sidebar-logo {
+    padding: 0.25rem 0 0.5rem 0;
+    text-align: left;
+}
+
+/* ==========================================================================
+   TOP ACCENT BAR
+   ========================================================================== */
+[data-testid="stAppViewContainer"]::before {
+    content: "";
+    display: block;
+    height: 3px;
+    background: linear-gradient(90deg, #54DED1 0%, #009293 40%, #FF5537 100%);
+    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+
+/* ==========================================================================
+   EXPANDER
+   ========================================================================== */
+[data-testid="stExpander"] {
+    border: 1px solid #D6CDC6 !important;
+    border-radius: 10px !important;
+    background: #ffffff;
+    overflow: hidden;
+}
+
+/* ==========================================================================
+   FORM SPACING
+   ========================================================================== */
+[data-testid="stVerticalBlock"] > [data-testid="stVerticalBlock"] {
+    gap: 0.5rem;
+}
+
+/* ==========================================================================
+   CODE & BLOCKQUOTE in PRD preview
+   ========================================================================== */
+[data-testid="stMarkdownContainer"] code {
+    background: #E0DBD6;
+    color: #35505B;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.88em;
+}
+[data-testid="stMarkdownContainer"] pre {
+    background: #202F36 !important;
+    color: #EDE9E5 !important;
+    border-radius: 8px;
+    padding: 1rem;
+}
+[data-testid="stMarkdownContainer"] pre code {
+    background: transparent;
+    color: #EDE9E5;
+}
+[data-testid="stMarkdownContainer"] blockquote {
+    border-left: 3px solid #54DED1;
+    background: #E0DBD6;
+    padding: 0.75rem 1rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+}
+[data-testid="stMarkdownContainer"] blockquote p {
+    color: #35505B !important;
+}

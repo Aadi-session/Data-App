@@ -18,6 +18,12 @@ OPENAI_MODEL = "gpt-4o"
 MAX_TOKENS = 6000
 TEMPERATURE = 0.7
 
+# --- Groq configuration (uncomment to switch from OpenAI to Groq) ---
+# GROQ_API_KEY = _get_secret("GROQ_API_KEY")
+# GROQ_MODEL = "llama-3.3-70b-versatile"
+# GROQ_MAX_TOKENS = 6000
+# GROQ_TEMPERATURE = 0.7
+
 DOMAIN_OPTIONS = [
     "Marketing",
     "Sales",

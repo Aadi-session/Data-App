@@ -260,45 +260,7 @@ Star schema for the BI-facing layer (dim_customers, fct_customer_health_daily) t
 
 ---
 
-## 9. Technical Architecture & Cost
-
-### Platform & Tools
-Snowflake (compute + storage) + dbt Core (transformations) + Airflow (orchestration) + Fivetran (ingestion) + Great Expectations (quality) + Tableau (visualization) on AWS
-
-### Architecture Overview
-```
-Source Systems → Fivetran/API → Snowflake Raw Layer → dbt Staging → dbt Intermediate → dbt Marts → Tableau / Feature Store / Reverse ETL
-                                                          ↑                                              ↓
-                                                   Great Expectations                              Census → HubSpot
-                                                   (quality gates)
-```
-
-### Performance Requirements
-- Expected data volume: ~500K customers, ~2M events/day, ~200GB total storage
-- Query performance: 95th percentile < 3 seconds for dashboard queries
-- Pipeline runtime: End-to-end < 90 minutes for full daily refresh
-- Scalability: Architecture supports 5x customer growth without warehouse size upgrade
-
-### Cost Estimate
-
-| Component | Estimated Monthly Cost | Notes |
-|---|---|---|
-| Snowflake Compute | $800 | XS warehouse, ~2 hours/day for dbt + queries |
-| Snowflake Storage | $200 | ~200GB compressed |
-| Fivetran Connectors | $500 | 4 connectors (Salesforce, Stripe, Zendesk, Mixpanel) |
-| Airflow (MWAA) | $300 | Managed Airflow on AWS |
-| **Total** | **$1,800** | |
-
-### Observability
-- Pipeline health dashboard in Airflow (DAG success rates, run durations)
-- dbt Cloud job monitoring with Slack alerts on failures
-- Great Expectations suite results published to data catalog
-- Snowflake query monitoring for performance regression
-- PagerDuty integration for P1 SLA breaches
-
----
-
-## 10. Scope & Constraints
+## 9. Scope & Constraints
 
 ### In Scope (v1)
 - Unified customer dimension table with entity resolution across all 4 sources
@@ -332,7 +294,7 @@ Source Systems → Fivetran/API → Snowflake Raw Layer → dbt Staging → dbt 
 
 ---
 
-## 11. Risks & Open Questions
+## 10. Risks & Open Questions
 
 ### Risks
 
@@ -355,7 +317,7 @@ Source Systems → Fivetran/API → Snowflake Raw Layer → dbt Staging → dbt 
 
 ---
 
-## 12. Milestones & Rollout
+## 11. Milestones & Rollout
 
 ### Timeline
 
@@ -663,48 +625,7 @@ Star schema with date, SKU, and location dimensions. Fact tables are partitioned
 
 ---
 
-## 9. Technical Architecture & Cost
-
-### Platform & Tools
-Google BigQuery (compute + storage) + dbt Core (transformations) + Cloud Composer / Airflow (orchestration) + Debezium (CDC) + Vertex AI (ML model training + serving) + Looker (visualization) on GCP
-
-### Architecture Overview
-```
-Source Systems → Ingestion Layer → BigQuery Raw → dbt Staging → dbt Features → Vertex AI Model → dbt Marts → Looker / Slack
-     ↓                                                  ↓                           ↓
-  Debezium (CDC)                                  Great Expectations            Model Registry
-  Cloud Functions (API)                           (quality gates)              (versioned models)
-  Cloud Storage (batch)
-```
-
-### Performance Requirements
-- Expected data volume: ~120 stores × 15,000 SKUs × 365 days = ~650M rows/year in fact tables
-- Query performance: 95th percentile < 5 seconds for location-level dashboard queries
-- Forecast pipeline runtime: < 2 hours for full daily run (data load + features + model inference + publish)
-- Scalability: Must handle 200 locations by Q1 2027 (67% increase) without pipeline redesign
-
-### Cost Estimate
-
-| Component | Estimated Monthly Cost | Notes |
-|---|---|---|
-| BigQuery Compute | $1,200 | On-demand pricing for dbt runs + dashboard queries |
-| BigQuery Storage | $400 | ~2TB active + 5TB cold storage |
-| Vertex AI | $600 | Daily model inference + monthly retraining |
-| Cloud Composer | $400 | Managed Airflow for orchestration |
-| Debezium / CDC | $200 | Running on GKE |
-| Looker | $1,500 | 15 users (existing license) |
-| **Total** | **$4,300** | |
-
-### Observability
-- Cloud Composer DAG monitoring with Slack alerts on failures
-- BigQuery slot utilization and query performance dashboards
-- Model performance monitoring: daily MAPE tracked and alerted if > 20%
-- dbt test results published to data catalog
-- Weekly automated report comparing forecast vs. actuals
-
----
-
-## 10. Scope & Constraints
+## 9. Scope & Constraints
 
 ### In Scope (v1)
 - Daily SKU-location demand forecast (30-day horizon)
@@ -738,7 +659,7 @@ Source Systems → Ingestion Layer → BigQuery Raw → dbt Staging → dbt Feat
 
 ---
 
-## 11. Risks & Open Questions
+## 10. Risks & Open Questions
 
 ### Risks
 
@@ -761,7 +682,7 @@ Source Systems → Ingestion Layer → BigQuery Raw → dbt Staging → dbt Feat
 
 ---
 
-## 12. Milestones & Rollout
+## 11. Milestones & Rollout
 
 ### Timeline
 
@@ -1081,49 +1002,7 @@ Star schema centered on the touchpoint fact table, with dimension tables for cam
 
 ---
 
-## 9. Technical Architecture & Cost
-
-### Platform & Tools
-Snowflake (compute + storage) + dbt Core (transformations) + Airflow (orchestration) + Fivetran (ingestion for CRM) + Custom Python (ad platform API connectors) + Looker (visualization) on AWS
-
-### Architecture Overview
-```
-Ad Platform APIs ────────┐
-  (Python connectors)    │
-HubSpot (Fivetran CDC) ──┤──→ Snowflake Raw ──→ dbt Staging ──→ dbt Identity ──→ dbt Attribution ──→ dbt Marts ──→ Looker
-Salesforce (Fivetran) ───┤                      (clean,          Stitching        (4 model            (rpt_ views)
-Snowplow (S3 → Snowpipe) ┤                      parse UTMs,      (email match,     calculations)
-Stripe (Fivetran CDC) ───┘                       dedup)           cross-system
-                                                                   resolution)
-```
-
-### Performance Requirements
-- Expected data volume: ~500K touchpoints/month, ~5K conversions/month, ~50GB total storage
-- Query performance: 95th percentile < 3 seconds for dashboard queries (pre-aggregated tables)
-- Pipeline runtime: End-to-end < 2 hours for daily run
-- Scalability: Handles 3x touchpoint volume growth without warehouse size upgrade
-
-### Cost Estimate
-
-| Component | Estimated Monthly Cost | Notes |
-|---|---|---|
-| Snowflake Compute | $600 | XS warehouse for dbt; S warehouse for Looker queries |
-| Snowflake Storage | $100 | ~50GB compressed |
-| Fivetran Connectors | $400 | HubSpot, Salesforce, Stripe |
-| Airflow (MWAA) | $300 | Managed Airflow |
-| Custom API Connectors | $50 | Lambda functions for ad platform pulls |
-| **Total** | **$1,450** | Excludes Looker license (existing) |
-
-### Observability
-- Airflow DAG monitoring with Slack alerts on failures
-- Daily data quality scorecard (completeness, freshness, accuracy) in Looker
-- Revenue reconciliation check runs automatically after each pipeline completion
-- Weekly UTM compliance report emailed to channel managers
-- PagerDuty escalation for SLA breaches
-
----
-
-## 10. Scope & Constraints
+## 9. Scope & Constraints
 
 ### In Scope (v1)
 - Unified touchpoint timeline across all 6 channels
@@ -1157,7 +1036,7 @@ Stripe (Fivetran CDC) ───┘                       dedup)           cross-
 
 ---
 
-## 11. Risks & Open Questions
+## 10. Risks & Open Questions
 
 ### Risks
 
@@ -1180,7 +1059,7 @@ Stripe (Fivetran CDC) ───┘                       dedup)           cross-
 
 ---
 
-## 12. Milestones & Rollout
+## 11. Milestones & Rollout
 
 ### Timeline
 

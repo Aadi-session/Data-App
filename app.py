@@ -35,6 +35,41 @@ css_path = Path(__file__).parent / "assets" / "style.css"
 if css_path.exists():
     st.markdown(f"<style>{css_path.read_text()}</style>", unsafe_allow_html=True)
 
+st.markdown(
+    """<style>
+    [data-testid="stAppViewContainer"] > div {
+        flex: 1 1 auto !important;
+        min-width: 0 !important;
+        width: auto !important;
+    }
+    [data-testid="stAppViewContainer"] > section[data-testid="stSidebar"] {
+        flex: 0 0 280px !important;
+    }
+    [data-testid="stMain"],
+    section[data-testid="stMain"] {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    .stMainBlockContainer, [data-testid="stMainBlockContainer"],
+    .block-container, section[data-testid="stMain"] > div {
+        max-width: 100% !important;
+        width: 100% !important;
+        padding-left: 2.5rem !important;
+        padding-right: 2.5rem !important;
+    }
+    header[data-testid="stHeader"] {
+        height: 0 !important; min-height: 0 !important;
+        padding: 0 !important; visibility: hidden !important;
+    }
+    [data-testid="stSidebar"] {
+        min-width: 260px !important;
+        max-width: 280px !important;
+        width: 280px !important;
+    }
+    </style>""",
+    unsafe_allow_html=True,
+)
+
 # ---------------------------------------------------------------------------
 # Session state defaults
 # ---------------------------------------------------------------------------

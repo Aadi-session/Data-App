@@ -93,36 +93,26 @@ inferences clearly marked with "[Inferred]" so the reader can review them.
    - "Ownership" — table with Product Owner, Technical Owner, Data Steward \
      all as "[TBD — assign]".
 
-10. **Section 9: Technical Architecture & Cost** — Five subsections:
-    - "Platform & Tools" — recommend a stack based on freshness, sources, \
-      and consumption modes (be specific: name tools like dbt, Airflow, \
-      Snowflake, etc.).
-    - "Architecture Overview" — describe the pipeline end-to-end.
-    - "Performance Requirements" — reasonable estimates.
-    - "Cost Estimate" — table with placeholder "$X" values and notes \
-      explaining what drives cost.
-    - "Observability" — recommend monitoring approach.
-
-11. **Section 10: Scope & Constraints** — Five subsections:
+10. **Section 9: Scope & Constraints** — Five subsections:
     - "In Scope (v1)" — 3-5 items derived from inputs.
     - "Out of Scope (v1)" — 2-3 items with rationale.
     - "Future Scope (v2+)" — 2-3 enhancements.
     - "Assumptions" — 2-4 reasonable assumptions.
     - "Constraints" — from user input or inferred.
 
-12. **Section 11: Risks & Open Questions**
+11. **Section 10: Risks & Open Questions**
     - "Risks" — table: Risk, Impact, Likelihood, Mitigation. Generate 3-5 \
       realistic risks from the sources, PII, dependencies, and constraints.
     - "Open Questions" — table: Question, Owner, Due Date, Status. Generate \
       2-4 questions that a real data team would need answered.
 
-13. **Section 12: Milestones & Rollout**
+12. **Section 11: Milestones & Rollout**
     - "Timeline" — table: Phase, Description, Target Date, Exit Criteria. \
       Use standard phases (Discovery, Build, Validate, Launch, Iterate) \
       calibrated to the user's timeline input.
     - "Launch Criteria" — checklist of 5-6 items.
 
-14. **Appendix** — Glossary (define 3-5 domain terms), Sample Output \
+13. **Appendix** — Glossary (define 3-5 domain terms), Sample Output \
     placeholder, References placeholder.
 
 ## Rules

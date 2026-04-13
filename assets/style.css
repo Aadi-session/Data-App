@@ -18,24 +18,88 @@ body {
     font-family: "PP Neue Montreal", "Inter", "DM Sans", -apple-system, BlinkMacSystemFont, sans-serif !important;
 }
 
+/* Main page background */
+[data-testid="stAppViewContainer"],
+[data-testid="stAppViewContainer"] > section,
+.stApp,
+[data-testid="stMain"] {
+    background-color: #f8f7f5 !important;
+}
+
+/* Hide Streamlit default header/toolbar to reclaim vertical space */
+header[data-testid="stHeader"] {
+    height: 0 !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    visibility: hidden !important;
+}
+
+/* ==========================================================================
+   FULL-WIDTH LAYOUT — override Streamlit's default max-width constraints
+   Works across Streamlit 1.30+ through 1.56+
+   ========================================================================== */
+
+/* The wrapper div between stAppViewContainer and stMain must stretch */
+[data-testid="stAppViewContainer"] > div {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    width: auto !important;
+}
+
+/* Sidebar is a <section>, exclude it from the stretch rule */
+[data-testid="stAppViewContainer"] > section[data-testid="stSidebar"] {
+    flex: 0 0 280px !important;
+}
+
+/* stMain itself fills parent */
+[data-testid="stMain"],
+section[data-testid="stMain"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+}
+
+/* The block-container that holds all content */
+.stMainBlockContainer,
+[data-testid="stMainBlockContainer"],
+.block-container,
+section[data-testid="stMain"] > div {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding-left: 2.5rem !important;
+    padding-right: 2.5rem !important;
+    padding-top: 1rem !important;
+}
+
+/* Sidebar — compact 280px width */
+[data-testid="stSidebar"] {
+    min-width: 260px !important;
+    max-width: 280px !important;
+    width: 280px !important;
+}
+[data-testid="stSidebar"] > div:first-child {
+    width: 280px !important;
+    min-width: 260px !important;
+}
+
 /* ==========================================================================
    SIDEBAR  (Midnight background, light text)
    ========================================================================== */
-[data-testid="stSidebar"] {
-    background: #202F36 !important;
-}
-[data-testid="stSidebar"] > div {
+[data-testid="stSidebar"],
+[data-testid="stSidebar"] > div,
+[data-testid="stSidebar"] > div:first-child {
     background: #202F36 !important;
 }
 
-/* Sidebar text — target text elements only, NOT icons */
+/* Sidebar text — light text on dark background */
 [data-testid="stSidebar"] h1,
 [data-testid="stSidebar"] h2,
 [data-testid="stSidebar"] h3,
 [data-testid="stSidebar"] p,
 [data-testid="stSidebar"] label,
-[data-testid="stSidebar"] li {
-    color: #29221a !important;
+[data-testid="stSidebar"] li,
+[data-testid="stSidebar"] span {
+    color: #241607 !important;
 }
 
 /* Section labels (SAMPLE PRDS, QUICK-START TEMPLATES) */
@@ -87,7 +151,7 @@ body {
 [data-testid="stSidebar"] textarea {
     background: rgba(255, 255, 255, 0.08) !important;
     border: 1px solid rgba(84, 222, 209, 0.25) !important;
-    color: #EDE9E5 !important;
+    color: #2c2722 !important;
     border-radius: 8px;
 }
 
@@ -335,7 +399,8 @@ hr {
 }
 
 /* ==========================================================================
-   TOP ACCENT BAR
+   TOP ACCENT BAR  — must be position:absolute so it doesn't become a flex item
+   in the stAppViewContainer flex-row layout
    ========================================================================== */
 [data-testid="stAppViewContainer"]::before {
     content: "";
@@ -343,9 +408,11 @@ hr {
     height: 3px;
     background: linear-gradient(90deg, #54DED1 0%, #009293 40%, #FF5537 100%);
     width: 100%;
-    position: sticky;
+    position: absolute;
     top: 0;
+    left: 0;
     z-index: 999;
+    pointer-events: none;
 }
 
 /* ==========================================================================
